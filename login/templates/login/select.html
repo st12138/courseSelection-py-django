@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选课</title>
+</head>
+<body style="background-image: url({% static 'login/images/3.jpg' %});background-size:100% 200%;background-repeat:no-repeat;">
+     <div style="text-align:center;">
+         <font color="white">
+        <h1>选课</h1>
+        <h2>hello {{student.stuName}}</h2>
+        <form action="{% url 'login:result' %}" method="post">
+          <h3>已选课程:{{student.stuCou}}</h3>
+          {% if course %}
+            <p>
+              课程名称 时间 老师 已选 可选
+            </p>
+            {% for q in course %}
+              <p>
+              <input type="checkbox" name="couSel" value="{{q.couName}}">
+              {{ q.couName }} {{q.couTime}} {{q.couTea}} {{q.couAllNum}} {{q.couLeftNum}}
+              </p>
+            {% endfor %}
+
+          {% else %}
+            <p>No polls are available.</p>
+          {% endif %}
+          <input type="hidden" name="stu" value={{student.stuName}}>
+          <input type="submit" value="提交">
+        </form>
+         </font>
+    </div>
+</body>
+</html>
